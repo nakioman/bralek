@@ -1,0 +1,20 @@
+﻿@model HomeMenu
+<ul class="nav nav-list" id="homeMenu">
+    <li id="allItems" @(Model == HomeMenu.Home ? "class=active" : String.Empty)><a href="#" data-bind="click: MenuItemClick">
+        <i class="icon-home"></i>&nbsp;@Labels.ALL_ITEMS <b data-bind="html: AllUnreadItems"></b>
+    </a></li>
+    <li><a href="#" data-bind="click: MenuItemClick" data-id="-1"><i class="icon-book"></i>&nbsp;@Labels.BOOKMARKS</a></li>
+    <li class="divider"></li>
+    <li id="subscriptionsMenu">
+        <a class="pull-right" href="#popup" data-toggle="modal" data-remote="@Url.SubscriptionAdd()" id="subscriptionMenuAddItem"><i class="icon-plus"></i></a>
+        <a data-toggle="collapse" href="#subscriptionsItems" id="subscriptionsMainItem"><i class="icon-caret-down"></i>&nbsp;@Labels.SUBSCRIPTIONS</a>
+        <ul class="nav nav-list collapse in" id="subscriptionsItems" data-bind="template: { foreach: Subscriptions, afterRender: AfterRenderHomeItems }">
+            <li>
+                <a href="#" class="word-wrap" data-bind="click: $parent.MenuItemClick, attr: { 'data-id': Id }">
+                    <img class="favicon" src="@Url.Image("feedicon.png")" data-bind="attr: { 'data-src': FavIconUrl }" alt="favIcon" />
+                    <small data-bind="html: FormatedTitle"></small>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

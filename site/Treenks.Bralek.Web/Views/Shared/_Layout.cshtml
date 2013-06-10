@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="@Url.Image("logo.png")" />
+    <title>@Labels.WEBSITE_NAME @(!String.IsNullOrWhiteSpace(ViewBag.Title) ? String.Format(" - {0}", ViewBag.Title) : String.Empty)</title>
+    @Styles.Render("~/Content/site")
+    <script type="text/javascript" src="~/Scripts/Shared/analytics.js"></script>
+</head>
+<body>
+    <section id="navbar">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand" href="@Url.HomeIndex()"></a>
+                    @using (Ajax.BeginForm("Search", "Subscription", null,
+                        new AjaxOptions
+                        {
+                            HttpMethod = "Post",
+                            OnBegin = "Common.SearchFeedItems",
+                            OnSuccess = "Common.UpdateSearchFeedItes(data)"
+                        },
+                        new { @class = "navbar-search pull-left", @id = "frmSearchForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="fromPage" id="searchFromPage" value="0" />
+                        <input type="text" class="search-query input-xxlarge" name="query" placeholder="@Labels.SEARCH" />
+                        <i class="icon-search"></i>
+                    }
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-cogs"></i><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><b>&nbsp;@Labels.MARK_AS_READ</b></li>
+                                <li id="markReadOlderOneDay"><a href="#">@Labels.MARK_AS_READ_ONE_DAY</a></li>
+                                <li id="markReadOlderOneWeek"><a href="#">@Labels.MARK_AS_READ_ONE_WEEK</a></li>
+                                <li id="markReadOlderOneMonth"><a href="#">@Labels.MARK_AS_READ_ONE_MONTH</a></li>
+                                <li id="markReadOlderAll"><a href="#">@Labels.ALL_ITEMS</a></li>
+                                <li class="divider"></li>
+                                <li><b>&nbsp;@Labels.FILTERS</b></li>
+                                <li id="oldestFirstFilter"><a href="#"><i></i>&nbsp;@Labels.OLDEST_FIRST</a></li>
+                                <li id="showAllItemsFilter"><a href="#"><i></i>&nbsp;@Labels.SHOW_ALL_ITEMS</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.AccountChangePassword()"><i class="icon-user"></i>&nbsp;@Labels.SETTINGS</a></li>
+                                <li><a id="signoutAnchor" href="#"><i class="icon-signout"></i>&nbsp;@Labels.SIGN_OUT</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    @{Html.RenderAction("Alerts", "Shared");}
+    <section class="container-fluid" id="mainSection">
+        <div class="row-fluid">
+            <div class="span3">
+                @RenderSection("menu", required: true)
+            </div>
+            <div class="span9">
+                <div class="row-fluid">
+                    <div class="span12 text-center padding-notop alert-red hide" id="alertErrorLoadingItems">
+                        <a href="#" class="close">&times;&nbsp;</a>
+                        <small>@Messages.ERROR_LOADING_ITEMS</small>
+                    </div>
+                    </div>
+                <div class="row-fluid">
+                    <div class="span12 text-center padding-notop alert-red hide" id="alertErrorMarkasReadItems">
+                        <a href="#" class="close">&times;&nbsp;</a>
+                        <small>@Messages.ERROR_MARK_ITEMS_READ</small>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12" id="main">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="navbar navbar-fixed-bottom">
+        <div class="container-fluid pull-right">
+            <a href="http://www.treenks.com" target="_blank">Treenks</a> &copy; @DateTime.UtcNow.Year
+            <a href="mailto:contact@bralek.com"><i class="icon-envelope"></i></a>
+        </div>
+    </footer>
+    <!-- Modal -->
+    <div id="popup" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <a href="#" class="popup-close"></a>
+        <div class="modal-body" id="popup-modal-body">
+        </div>
+    </div>
+    <!-- SignOut Form -->
+    @using (Html.BeginForm("Logoff", "Account", FormMethod.Post, new { @id = "logoffForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    <div id="antiForgeryToken">
+        @Html.AntiForgeryToken()
+    </div>
+    @Scripts.Render("~/bundles/sitescripts")
+    <script type="text/javascript">
+        $(function () {
+            Common.Init('@Url.SubscriptionMenu()', '@Url.SubscriptionMarkItemsAsRead()');
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

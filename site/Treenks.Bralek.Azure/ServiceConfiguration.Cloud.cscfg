@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="Treenks.Bralek.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2012-10.1.8">
+  <Role name="Treenks.Bralek.Worker">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="DefaultConnection" value="Data Source=tcp:rty4hx58x0.database.windows.net,1433;Initial Catalog=bralek;User Id=treenksDbUser@rty4hx58x0;Password=123Google;MultipleActiveResultSets=true;" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="iglinsek" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEGfSIQvUjQaERDmij+ZRckMwDQYJKoZIhvcNAQEBBQAEggEAEz0LPmwOMCT3+c3V5qvWSS7wLX+TNBezqNn2nqspKLfEB9jVcB77uXTtcEwy4aJ4nNk0qfe9htn8ryZZz5YeidUdjxgTqLiBQSPow2DdhKl7UIpxGP60QUWlej7TovCPGmhLCPwxGAtSpa4Gi36ynIuJ2c1AOoZ10Qw/I4pkagvpt6WgAVlsZDhBInlTu9abshKSmDriw+c9gWIRfVbh/wb2VWf4LrEY62mkTsaj5HxCDKqO976NfaoMxm+NJgdEEB+ZbgUep22h3SCfNsdugopQ+uWgVyAEGf1G73vTWui06GrcLY8Xo1oyfTiuKvpdCFl6TC1tnI0KvOVMnH8b9jAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECFIR1W6836YDgBAoP9sK9qx8emlMH0wQXnyr" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2014-06-02T23:59:59.0000000-03:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=bralek;AccountKey=lWU/jPcuihgp5d4GRVG/5h1WWAN0qsG0VVfeoW43mbstw5IQXxBmgC8TywALno6OEszpkoI9f86Z+BYzdZ5arw==" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="EE8199E85E93BAE235DA00964258068198281BED" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

@@ -1,0 +1,118 @@
+﻿.navbar .brand {
+    height: 20px;
+    width: 80px;
+    background: url('images/logobg.png') no-repeat center center;
+}
+
+.validation-summary-errors ul {
+    margin: 0;
+}
+
+    .validation-summary-errors ul li {
+        display: block;
+    }
+
+#recaptcha_table {
+    table-layout: auto;
+}
+
+div.controls a#recaptcha_image.thumbnail img {
+    width: 100%;
+    height: auto;
+}
+
+.text-middle {
+    margin-top: 20%;
+}
+
+.padding-notop {
+    margin-top: -20px;
+}
+
+.favicon {
+    height: 14px;
+    width: 14px;
+}
+
+.word-wrap {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.subscriptionItem {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: 0 0 0 1px black, 1px 1px 2px 1px #0a0a00;
+    -moz-box-shadow: 0 0 0 1px black, 1px 1px 2px 1px #0a0a00;
+    -webkit-box-shadow: 0 0 0 1px black, 1px 1px 2px 1px #0a0a00;
+}
+
+    .subscriptionItem .span12 {
+        padding: 10px;
+    }
+
+    .subscriptionItem h3 a:hover {
+        text-decoration: none;
+    }
+
+.subscriptionItem-focus {
+    box-shadow: 0 0 0 1px blue, 1px 1px 2px 1px blue;
+    -moz-box-shadow: 0 0 0 1px blue, 1px 1px 2px 1px blue;
+    -webkit-box-shadow: 0 0 0 1px blue, 1px 1px 2px 1px blue;
+}
+
+#subscriptionMenuAddItem:hover {
+    background-color: white;
+    color: red;
+}
+
+.popup-close {
+    background-image: url('images/fancybox_sprite.png');
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: 8040;
+}
+
+.form-nomargin {
+    margin: 0;
+}
+
+.alert-yellow {
+    min-height: 20px !important;
+    background: #FFCF79;
+    margin-bottom: 20px;
+    border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+}
+
+
+.alert-red {
+    min-height: 20px !important;
+    background: #FF0000;
+    margin-bottom: 20px;
+    border-radius: 0 0 10px 10px;
+    -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    color:white;
+}
+
+.bookmark:hover {
+    text-decoration: none;
+}
+
+.navbar-inner .search-query {
+    margin-right: -29px;
+}
+
+footer {
+    background: black;
+    font-size: 12px;
+}

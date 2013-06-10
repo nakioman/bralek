@@ -1,0 +1,19 @@
+﻿@model HomeIndexViewModel
+@{
+    ViewBag.Title = "Home";
+}
+@section menu{
+    @{Html.RenderPartial("_HomeMenu", HomeMenu.Home);}
+}
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            HomeIndex.Init('@Url.SubscriptionGet()', '@Url.SubscriptionMarkAsRead()', 
+                @Model.OrderByOldestFirst.ToString().ToLowerInvariant(),
+                @Model.ShowAllItems.ToString().ToLowerInvariant(),
+                '@Url.SubscriptionMenuItemsUpdated()', '@Url.SubscriptionBookmark()');
+        });
+    </script>
+}
+

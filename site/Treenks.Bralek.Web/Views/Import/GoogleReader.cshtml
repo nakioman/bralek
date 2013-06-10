@@ -1,0 +1,42 @@
+﻿@model GoogleReaderImportViewModel
+@{
+    ViewBag.Title = Labels.IMPORT_FEEDS;
+}
+@section menu
+{
+    @{Html.RenderPartial("_SettingsMenu", SettingsMenu.ImportGoogleReader);}
+}
+@using (Html.BeginForm("GoogleReader", "Import", FormMethod.Post, new { @id = "importForm", @enctype = "multipart/form-data" }))
+{    
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <div id="formInfo" class="alert alert-success hide">
+                <a class="close">x</a>
+                @ViewBag.SuccessMessage
+            </div>
+            <div id="formAlert" class="alert alert-error hide">
+                <a class="close">x</a>
+                @Html.ValidationSummary(true)
+            </div>
+            <fieldset>
+                <legend class="text-center">@Labels.IMPORT_FEEDS</legend>
+                <h4 class="text-info">@Messages.IMPORT_INFO</h4>
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                    <div class="input-append">
+                        <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i><span class="fileupload-preview"></span></div>
+                        <span class="btn btn-file"><span class="fileupload-new">@Labels.SELECT_FILE</span><span class="fileupload-exists">@Labels.CHANGE</span>@Html.TextBoxFor(m => m.File, new { @type = "file" })</span>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row-fluid">
+                <div class="span12 text-center">
+                    <button type="submit" class="btn btn-primary">@Labels.IMPORT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/Import/googlereader.js")
+}

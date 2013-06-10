@@ -1,0 +1,5 @@
+﻿@model SettingsMenu
+<ul class="nav nav-list">
+    <li @(Model == SettingsMenu.Settings ? "class=active" : String.Empty) ><a href="@Url.AccountChangePassword()" ><i class="icon-user"></i>&nbsp;@Labels.SETTINGS</a></li>
+    <li @(Model == SettingsMenu.ImportGoogleReader ? "class=active" : String.Empty)><a href="@Url.ImportGoogleReader()" ><i class="icon-cloud"></i>&nbsp;@Labels.IMPORT_FEEDS</a></li>
+</ul>

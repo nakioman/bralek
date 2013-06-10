@@ -1,0 +1,36 @@
+﻿@model AddSubscriptionViewModel
+<div class="row-fluid text-center" id="addSubscription">
+    @using (Ajax.BeginForm("Add", "Subscription", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "addSubscription", LoadingElementId = "addSubscriptionLoading", OnBegin="hideSubscriptionform" }, new { @id = "frmAddSubscription", @class = "form-nomargin form-inline" }))
+    {    
+        <div class="span12" id="addSubscriptionFormData">
+            <div id="formAlert" class="alert alert-info container-fluid padding-notop hide">
+                <a class="close" href="#">x</a>
+                @Html.ValidationSummary(false)
+            </div>
+            @Html.TextBoxFor(m => m.FeedUrl, new { @placeholder = "Feed Url", @class = "input-xlarge", @type = "url" })
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+        <div class="span12 text-center hide" id="addSubscriptionLoading">
+            <i class="icon-spinner icon-spin icon-large"></i>
+        </div>
+        @Html.AntiForgeryToken()
+        <script type="text/javascript">
+            $(function () {
+                Common.FormInlineValidationSetup('frmAddSubscription');
+                $('#formAlert a').click(function () {
+                    $('#formAlert').hide(200);
+                });
+
+                if ($('#formAlert').text().trim() != 'x') {
+                    $('#formAlert').show();
+                }
+
+                
+            });
+
+            function hideSubscriptionform() {
+                $('#addSubscriptionFormData').hide();
+            }
+        </script>    
+    }
+</div>

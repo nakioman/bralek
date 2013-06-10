@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SubscriptionItemViewModel>
+<div class="row-fluid">
+    <div class="span12 text-center padding-notop alert-yellow hide" id="newItemsAvailable">
+        <a href="#" class="close">&times;&nbsp;</a>
+        <small>@Messages.NEW_ITEM_UNREAD <a href="#">@Labels.REFRESH</a></small>
+    </div>        
+</div>
+@foreach (var item in Model)
+{
+    <div class="row-fluid subscriptionItem" data-id="@item.Id" data-feedid="@item.FeedId" data-alreadyread="@item.AlreadyRead.ToString().ToLowerInvariant()">
+        <div class="span12">
+            <h4 class="pull-right"><a href="#" title="@Labels.BOOKMARK" class="bookmark">
+                @if (item.InBookmarks)
+                {
+                    <i class="icon-bookmark"></i>
+                }
+                else
+                {
+                    <i class="icon-bookmark-empty"></i>
+                }
+            </a></h4>
+            <h3><a href="@item.OriginalUrl">@item.Title</a><a href="@item.OriginalUrl" target="_blank"><small><i class="icon-external-link"></i></small></a></h3>
+
+            <div class="row-fluid">
+                <div class="span8"><small>@Labels.FROM&nbsp;<a href="#" data-bind="click: ItemFromClick" class="from" data-feedid="@item.FeedId" >@item.FeedName</a>&nbsp;@Labels.BY&nbsp;@item.Author</small></div>
+                <div class="span4 text-right"><small data-publishdateutc="@item.PublishDateUTC.GetValueOrDefault(DateTime.UtcNow).ToString("M/d/yyyy HH:mm")" class="publishdate"></small></div>
+            </div>
+            <div class="itemContent">
+                @Html.Raw(item.Content)
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <span><a href="#" title="@Labels.BOOKMARK" class="bookmark">
+                        @if (item.InBookmarks)
+                        {
+                            <i class="icon-bookmark"></i>
+                        }
+                        else
+                        {
+                            <i class="icon-bookmark-empty"></i>
+                        }
+                    </a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (!Model.Any())
+{
+    <div class="row-fluid">
+        <div class="span12 text-center">
+            <h3 class="text-info">@Messages.NO_ITEMS_LEFT_TO_READ</h3>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            HomeIndex.MarkFeedAsEmpty();
+        });
+    </script>
+}
+

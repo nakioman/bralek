@@ -1,0 +1,40 @@
+﻿@model RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    ViewBag.Title = Labels.REGISTER;
+    ReCaptcha.PublicKey = "6Lc_lOESAAAAAA3qwRATQGcb8WHzQ67BggRfKbIL";
+}
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @autocomplete = "off", @id = "registerForm" }))
+{    
+    <div class="row-fluid">
+        <div class="span6 offset3 well">
+            <div id="formAlert" class="alert alert-error hide">
+                <a class="close">x</a>
+                @Html.ValidationSummary(true)
+            </div>
+            <fieldset>
+                <legend class="center-align">@Labels.REGISTER</legend>
+                @Html.TextBoxFor(m => m.Email, new { @class = "input-xlarge", @placeholder = @Labels.EMAIL, @type = "email", @autocomplete = "off" })<br />
+                @Html.PasswordFor(m => m.Password, new { @placeholder = @Labels.PASSWORD, @autocomplete = "off" })<br />
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = @Labels.CONFIRM_PASSWORD, @autocomplete = "off" })<br />
+                @ReCaptcha.GetHtml(theme: "clean")<br />
+            </fieldset>
+            <div class="row-fluid">
+                <div class="span12 center-align">
+                    <button type="submit" class="btn btn-primary">@Labels.REGISTER</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row-fluid">
+                <div class="span12 left-align">
+                    <a href="@Url.AccountLogin()" class="btn">@Labels.LOGIN</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Account/register.js")
+}

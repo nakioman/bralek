@@ -1,0 +1,41 @@
+﻿@model LoginViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    ViewBag.Title = Labels.LOGIN;
+}
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @id = "loginForm" }))
+{    
+    <div class="row-fluid">
+        <div class="span6 offset3 well">
+            <div id="formAlert" class="alert alert-error hide">
+                <a class="close">x</a>
+                @Html.ValidationSummary(true)
+            </div>
+            <fieldset>
+                <legend class="center-align">@Labels.LOGIN</legend>
+                @Html.TextBoxFor(m => m.Email, new { @class = "input-xlarge", @placeholder = @Labels.EMAIL, @type = "email" })<br />
+                @Html.PasswordFor(m => m.Password, new { @placeholder = @Labels.PASSWORD })<br />
+                <label class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe) @Labels.REMEMBER_ME
+                </label>
+            </fieldset>
+            <div class="row-fluid">
+                <div class="span12 center-align">
+                    <button type="submit" class="btn btn-primary">@Labels.LOGIN</button>
+                </div>
+            </div>
+            <hr />
+            <div class="row-fluid">
+                <div class="span12 left-align">
+                    <a href="@Url.AccountRecoverPassword()" class="btn">@Labels.RECOVER_PASSWORD</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ReturnUrl)
+}
+@section scripts
+{
+    @Scripts.Render("~/Scripts/Account/login.js")
+}

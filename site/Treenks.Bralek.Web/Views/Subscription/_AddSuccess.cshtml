@@ -1,0 +1,9 @@
+﻿@model String
+<script type="text/javascript">
+    $(function () {
+        var item = ko.utils.parseJson('@Html.Raw(Model)');
+        ViewModel.Subscriptions.push(new MenuItem(item.Title, item.SiteUrl, item.Id, item.UnreadItems));
+        $('#popup .popup-close').click();
+        Common.SetupImagesLazyLoading();
+    });
+</script>
